@@ -1,14 +1,15 @@
 library(shiny)
 
 
-data <- read.table("data_coursera09_proj_v0.cat", skip=1)
+data <- read.table("../data_coursera09_proj_v0.cat", skip=1)
 
 shinyServer(
         function(input,output) {
                 
+                # IN APP TAB
                 output$headimage <- renderImage({
                         # Return a list containing the filename
-                        list(src = "Screen\ Shot\ 2015-06-20\ at\ 20.58.11.png",
+                        list(src = "../Screen\ Shot\ 2015-06-20\ at\ 20.58.11.png",
                              contentType = 'image/png',
                              width = 750,
                              height = 350)
@@ -17,28 +18,28 @@ shinyServer(
                                        
                 
                 output$XvsY <- renderPlot({
-                        if(input$id1 == "1") {xaxis <- log10(as.numeric(data[,3])); xtit="log Stellar Mass"}
-                        if(input$id1 == "2") {xaxis <- log10(as.numeric(data[,4])); xtit="log Star Formation Rate"}
-                        if(input$id1 == "3") {xaxis <- log10(as.numeric(data[,5])); xtit="log Specific Star Formation Rate"}
-                        if(input$id1 == "4") {xaxis <- log10(as.numeric(data[,6])); xtit="log Age"}
+                        if(input$id1 == "1") {xaxis <- log10(as.numeric(data[,3])); xtit="log Stellar Mass [Msun]"}
+                        if(input$id1 == "2") {xaxis <- log10(as.numeric(data[,4])); xtit="log Star Formation Rate [Msun/yr]"}
+                        if(input$id1 == "3") {xaxis <- log10(as.numeric(data[,5])); xtit="log Specific Star Formation Rate [1/Gyr]"}
+                        if(input$id1 == "4") {xaxis <- log10(as.numeric(data[,6])); xtit="log Age [Gyr]"}
                         if(input$id1 == "5") {xaxis <- as.numeric(data[,7]); xtit="Metallicity"}
-                        if(input$id1 == "6") {xaxis <- log10(as.numeric(data[,8])); xtit="log Total IR Luminosity"}
-                        if(input$id1 == "7") {xaxis <- log10(as.numeric(data[,9])); xtit="log 24 micron Luminosity"}
-                        if(input$id1 == "8") {xaxis <- as.numeric(data[,10]); xtit="Optical Extinction"}
-                        if(input$id1 == "9") {xaxis <- log10(as.numeric(data[,11])); xtit="log Dust Mass"}
-                        if(input$id1 == "10") {xaxis <- log10(as.numeric(data[,12])); xtit="log Age Universe when galaxy forms"}
+                        if(input$id1 == "6") {xaxis <- log10(as.numeric(data[,8])); xtit="log Total IR Luminosity [Lsun]"}
+                        if(input$id1 == "7") {xaxis <- log10(as.numeric(data[,9])); xtit="log 24 micron Luminosity [Lsun]"}
+                        if(input$id1 == "8") {xaxis <- as.numeric(data[,10]); xtit="Optical Extinction [mag]"}
+                        if(input$id1 == "9") {xaxis <- log10(as.numeric(data[,11])); xtit="log Dust Mass [Msun]"}
+                        if(input$id1 == "10") {xaxis <- log10(as.numeric(data[,12])); xtit="log Age Universe when galaxy forms [Gyr]"}
                         if(input$id1 == "11") {xaxis <- as.numeric(data[,1]); xtit="Observed Field in the Sky"}
 
-                        if(input$id2 == "1")  {yaxis <- log10(as.numeric(data[,3])); ytit="log Stellar Mass"}
-                        if(input$id2 == "2")  {yaxis <- log10(as.numeric(data[,4])); ytit="log Star Formation Rate"}
-                        if(input$id2 == "3")  {yaxis <- log10(as.numeric(data[,5])); ytit="log Specific Star Formation Rate"}
-                        if(input$id2 == "4")  {yaxis <- log10(as.numeric(data[,6])); ytit="log Age"}
+                        if(input$id2 == "1")  {yaxis <- log10(as.numeric(data[,3])); ytit="log Stellar Mass [Mstar]"}
+                        if(input$id2 == "2")  {yaxis <- log10(as.numeric(data[,4])); ytit="log Star Formation Rate [Mstar/yr]"}
+                        if(input$id2 == "3")  {yaxis <- log10(as.numeric(data[,5])); ytit="log Specific Star Formation Rate [1/Gyr]"}
+                        if(input$id2 == "4")  {yaxis <- log10(as.numeric(data[,6])); ytit="log Age [Gyr]"}
                         if(input$id2 == "5")  {yaxis <-       as.numeric(data[,7] ); ytit="Metallicity"}
-                        if(input$id2 == "6")  {yaxis <- log10(as.numeric(data[,8])); ytit="log Total IR Luminosity"}
-                        if(input$id2 == "7")  {yaxis <- log10(as.numeric(data[,9])); ytit="log 24 micron Luminosity"}
-                        if(input$id2 == "8")  {yaxis <-       as.numeric(data[,10]); ytit="Optical Extinction"}
-                        if(input$id2 == "9")  {yaxis <- log10(as.numeric(data[,11])); ytit="log Dust Mass"}
-                        if(input$id2 == "10") {yaxis <- log10(as.numeric(data[,12])); ytit="log Age Universe when galaxy forms"}
+                        if(input$id2 == "6")  {yaxis <- log10(as.numeric(data[,8])); ytit="log Total IR Luminosity [Lsun]"}
+                        if(input$id2 == "7")  {yaxis <- log10(as.numeric(data[,9])); ytit="log 24 micron Luminosity [Lsun]"}
+                        if(input$id2 == "8")  {yaxis <-       as.numeric(data[,10]); ytit="Optical Extinction [mag]"}
+                        if(input$id2 == "9")  {yaxis <- log10(as.numeric(data[,11])); ytit="log Dust Mass [Msun]"}
+                        if(input$id2 == "10") {yaxis <- log10(as.numeric(data[,12])); ytit="log Age Universe when galaxy forms {Gyr]"}
                         if(input$id2 == "11") {yaxis <-       as.numeric(data[,1])  ; ytit="Observed Field in the Sky"}
                         
                         
@@ -85,6 +86,26 @@ shinyServer(
                         }
                                  
                 })
+                
+                # IN DOCUMENTATION TAB
+                output$imBasic <- renderImage({
+                        # Return a list containing the filename
+                        list(src = "../Screen\ Shot\ 2015-06-20\ at\ 23.59.11.png",
+                             contentType = 'image/png',
+                             width = 750,
+                             height = 350)
+                }, deleteFile=F
+                )
+                
+                output$imLinFit <- renderImage({
+                        # Return a list containing the filename
+                        list(src = "../Screen\ Shot\ 2015-06-21\ at\ 0.00.16.png",
+                             contentType = 'image/png',
+                             width = 750,
+                             height = 450)
+                }, deleteFile=F
+                )
+                
                 
         }
 )
